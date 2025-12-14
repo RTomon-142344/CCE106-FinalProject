@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee | Rean Ramz Lending Corp</title>
+    <link rel="stylesheet" href="../css/add-employee.css">
+    <link rel="icon" href="../assets/logo-dark.png">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="nav-left">
+                <a href="admin.php">
+                    <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div id="themeToggle" class="theme-toggle"></div>
+                <a href="../php/admin.php" class="home-btn">
+                    <span>HOME</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-section">
+            <div class="form-container">
+                <h2>Add New Employee</h2>
+                <form class="add-employee-form" id="addEmployeeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" id="firstname" name="firstname" placeholder="Input First Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" id="lastname" name="lastname" placeholder="Input Last Name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Input Email" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Input Password" required>
+                            <div class="password-strength">
+                                <div class="strength-bar"></div>
+                                <small>Password strength: <span id="strengthText">Weak</span></small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="deptid">Department</label>
+                            <select id="deptid" name="deptid" required>
+                                <option value="">Select Department</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Secretary</option>
+                                <option value="3">Collector</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='../php/admin.php'">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Employee</button>
+                    </div>
+                    
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/dark_light_mode.js"></script>
+    <script src="../js/add-employee.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | Rean Ramz Lending Corp</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../assets/logo-dark.png">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div class="nav-left">
+                <a href="admin.php">
+                    <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div id="themeToggle" class="theme-toggle"></div>
+                <button id="logoutBtn" class="logout-btn">
+                    <span>LOGOUT</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- NOTIFICATIONS HERO SECTION -->
+    <div class="notifications-hero">
+        <div class="hero-header">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <h2>LATEST NOTIFICATIONS</h2>
+                <button id="refreshNotificationsBtn" class="refresh-btn" title="Refresh notifications">
+                    ↻
+                </button>
+            </div>
+            <a href="notification.php" class="view-all-btn">View All Notifications</a>
+        </div>
+        <div class="notifications-container">
+            <!-- Notifications will be loaded here -->
+            <div class="loading-notification">
+                Loading notifications...
+            </div>
+        </div>
+    </div>
+
+    <div class="serno">
+        <div class="services">
+            <h3>Services</h3>
+            <div class="service-items">
+
+                <a href="../php/add-employee.php">
+                    <div class="service-card">
+                        <img class="add-customer" src="../assets/addcustomer-light.png" alt="Add customer">
+                        <h4>ADD NEW EMPLOYEE</h4>
+                    </div>
+                </a>
+
+                <a href="../php/loginstatus.php">
+                    <div class="service-card">
+                        <img class="login-status" src="../assets/login-light.png" alt="Log-In">
+                        <h4>LOG-IN STATUS</h4>
+                    </div>
+                </a>
+
+                <a href="../php/check_rec.php">
+                    <div class="service-card">
+                        <img class="check-records" src="../assets/record-light.png" alt="Customer records">
+                        <h4>CHECK RECORDS</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Approval Modal (for admin dashboard) -->
+    <div id="approvalModal" class="modal approval-modal">
+        <div class="modal-content">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+    
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="logout-modal">
+        <div class="logout-modal-content">
+            <div class="logout-modal-icon">⚠️</div>
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to log out?</p>
+            <div class="logout-modal-buttons">
+                <button class="logout-modal-btn cancel" id="cancelLogout">Cancel</button>
+                <button class="logout-modal-btn confirm" id="confirmLogout">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dark_light_mode.js"></script>
+    <script src="../js/logout.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/loading.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collector</title>
+  <link rel="stylesheet" href="../css/collector.css">
+  <link rel="icon" href="../assets/logo-dark.png">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="nav-bar">
+            <div class="nav-left">
+                <a href="admin.html">
+                    <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div id="themeToggle" class="theme-toggle"></div>
+                <button id="logoutBtn" class="logout-btn">
+                    <span>LOGOUT</span>
+                </button>
+            </div>
+        </nav>
+  </header>
+
+  <!-- Stats Section -->
+  <div class="stats-box">
+    <div class="stats-text">
+      <h2>DAILY STATISTICS</h2>
+      <a>View more</a>
+    </div>
+    <div class="stats-graphics">
+      <img src="../assets/piechart.svg" alt="Pie chart">
+      <img src="../assets/barchart.svg" alt="Bar chart">
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="serno">
+    <!-- Notifications -->
+    <div class="notify-section">
+      <h3>Notifications</h3>
+      <div class="notify-boxes">
+        <div class="notify-box">No new notifications</div>
+        <div class="notify-box">System running smoothly</div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="services">
+      <h3>Services</h3>
+      <div class="service-items">
+        <a href="../php/payments.php">
+          <div class="service-card">
+            <img class="payment" src="../assets/wallet-light.png" alt="wallet">
+            <h4>PAYMENT</h4>
+          </div>
+        </a>
+        <a href="../php/collection_history.php">
+          <div class="service-card">
+            <img class="collection-history" src="../assets/audit-light.png" alt="Add customer">
+            <h4>COLLECTION HISTORY</h4>
+          </div>
+        </a>
+        <a href="../php/check_rec.php">
+          <div class="service-card">
+            <img class="check-records" src="../assets/record-light.png" alt="checkrecords">
+            <h4>CHECK RECORDS</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="../js/admin.js"></script>
+  <script src="../js/dark_light_mode.js"></script>
+</body>
+</html>

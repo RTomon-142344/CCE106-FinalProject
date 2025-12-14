@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Status | Rean Ramz Lending Corp</title>
+  <link rel="icon" href="../assets/logo-dark.png" />
+  <link rel="stylesheet" href="../css/loginstatus.css" />
+</head>
+
+<body>
+  <div class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
+  <header>
+    <nav class="nav-bar">
+      <div class="nav-left">
+          <a href="../php/admin.php">
+            <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+          </a>
+      </div>
+      <div class="nav-right">
+        <div id="themeToggle" class="theme-toggle"></div>
+          <a class="home-btn" href="../php/admin.php">
+            <span>HOME</span>
+          </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h3>Filters</h3>
+      </div>
+      <button class="tab active" data-tab="all">All Employees</button>
+      <button class="tab" data-tab="collectors">Collectors</button>
+      <button class="tab" data-tab="office">Office Workers</button>
+      
+      <div class="stats-card">
+        <h4>Statistics</h4>
+        <div class="stats-row">
+          <span>Total employees:</span>
+          <strong id="totalEmployees">0</strong>
+        </div>
+        <div class="stats-row">
+          <span>Active now:</span>
+          <strong id="activeEmployees">0</strong>
+        </div>
+        <div class="stats-row">
+          <span>Collectors:</span>
+          <strong id="collectorsCount">0</strong>
+        </div>
+        <div class="stats-row">
+          <span>Office workers:</span>
+          <strong id="officeCount">0</strong>
+        </div>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="toolbar">
+        <div class="header-info">
+          <h2>Employee Login Status</h2>
+          <p class="last-updated" id="lastUpdated">Last updated: Just now</p>
+        </div>
+        <div class="actions">
+          <div class="search-container">
+            <input type="text" placeholder="Search employees..." class="search" id="searchInput" />
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employee Table -->
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Department</th>
+              <th>Email</th>
+              <th>Time In</th>
+              <th>Time Out</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <tr>
+              <td colspan="7" class="loading">Loading employees...</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <div class="table-info">
+            <span id="showingCount">Showing 0 of 0 employees</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Login History Modal -->
+  <div class="modal" id="historyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Login History</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="history-filters">
+          <div class="form-group">
+            <label>Employee</label>
+            <select id="historyEmpSelect" class="modal-select">
+              <option value="">Select Employee</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Month</label>
+            <input type="month" id="historyMonth" class="modal-input" />
+          </div>
+          <button id="historyLoadBtn" class="btn btn-primary">Load History</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr>
+                <td colspan="3" style="text-align:center;padding:20px;">
+                  Select employee and month to view history
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Employee Modal -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Employee</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="editEmployeeForm" class="edit-form">
+          <input type="hidden" id="editEmpId" name="empid">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editFirstName">First Name</label>
+              <input type="text" id="editFirstName" name="firstname" required class="modal-input">
+              <div class="error-message" id="firstNameError"></div>
+            </div>
+            <div class="form-group">
+              <label for="editLastName">Last Name</label>
+              <input type="text" id="editLastName" name="lastname" required class="modal-input">
+              <div class="error-message" id="lastNameError"></div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editEmail">Email</label>
+              <input type="email" id="editEmail" name="email" required class="modal-input">
+              <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="form-group">
+              <label for="editDepartment">Department</label>
+              <select id="editDepartment" name="deptid" required class="modal-select">
+                <option value="">Select Department</option>
+                <option value="1">Admin</option>
+                <option value="2">Secretary</option>
+                <option value="3">Collector</option>
+              </select>
+              <div class="error-message" id="deptError"></div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="editPassword">New Password (leave empty to keep current)</label>
+              <input type="password" id="editPassword" name="password" class="modal-input">
+              <div class="password-strength">
+                <div class="strength-bar"></div>
+                <small>Password strength: <span id="editStrengthText">Weak</span></small>
+              </div>
+              <div class="error-message" id="passwordError"></div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="editCancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Employee</button>
+          </div>
+          
+          <div id="editFormMessage" class="form-message"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+    <!-- Password Verification Modal for Edit -->
+  <div class="modal" id="passwordEditModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Verify Your Identity</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="password-verify">
+          <div class="verify-icon">🔒</div>
+          <p>Please enter your admin password to edit employee details.</p>
+          <form id="passwordEditForm" class="verify-form">
+            <input type="hidden" id="editEmployeeId">
+            <div class="form-group">
+              <label for="editAdminPassword">Admin Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="editAdminPassword" placeholder="Enter your password" required class="modal-input">
+                <button type="button" class="toggle-password" data-target="passwordFieldId" aria-label="Toggle password visibility"></button>
+              </div>
+              <div class="error-message" id="editPasswordError"></div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="editPasswordCancelBtn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Verify & Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Verification Modal for Delete -->
+  <div class="modal" id="passwordDeleteModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirm Deletion</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="password-verify">
+          <div class="verify-icon">⚠️</div>
+          <p id="deleteWarningMessage">Are you sure you want to delete this employee? This action cannot be undone.</p>
+          <form id="passwordDeleteForm" class="verify-form">
+            <input type="hidden" id="deleteEmployeeId">
+            <div class="form-group">
+              <label for="deleteAdminPassword">Admin Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="deleteAdminPassword" placeholder="Enter your password" required class="modal-input">
+                <button type="button" class="toggle-password" data-target="passwordFieldId" aria-label="Toggle password visibility"></button>
+              </div>
+              <div class="error-message" id="deletePasswordError"></div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="deletePasswordCancelBtn">Cancel</button>
+              <button type="submit" class="btn btn-danger">Delete Employee</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
+  <script src="../js/loginstatus.js"></script>
+  <script src="../js/dark_light_mode.js"></script>
+</body>
+</html>
