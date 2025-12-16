@@ -10,18 +10,17 @@
 <body>
     <header>
         <nav class="nav-bar">
-            <ul class="navi">
-            <li>
-                <a href="../php/{{HOME_PAGE}}">
-                <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+            <div class="nav-left">
+                <a href="../php/secretary.php">
+                    <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
                 </a>
-            </li>
-            <li>
-                <a href="../php/{{HOME_PAGE}}">
-                <img class="home" src="../assets/home.svg" alt="Home">
+            </div>
+            <div class="nav-right">
+                <div id="themeToggle" class="theme-toggle"></div>
+                <a href="../php/secretary.php" class="home-btn">
+                    <span>HOME</span>
                 </a>
-            </li>
-            </ul>
+            </div>
         </nav>
     </header>
 
@@ -74,3 +73,4 @@
 </body>
 </html>
 <script src="../js/daily_collection.js"></script>
+<script src="../js/dark_light_mode.js"></script>

@@ -3,26 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment History</title>
+    <title>Payment Management| Rean Ramz Lending Corp</title>
     <link rel="stylesheet" href="../css/payments.css">
+    <link rel="stylesheet" href="../css/loading.css">
     <link rel="icon" href="../assets/logo-dark.png">
 </head>
 <body>
+<div id="loadingScreen" class="loading-screen">
+  <div class="loading-content">
+    <div class="loading-logo">
+      <img src="../assets/logo-light.png" alt="Rean Ramz Lending Corp" class="loading-logo-img">
+    </div>
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading...</div>
+  </div>
+</div>
 <header>
   <nav class="nav-bar">
-    <ul class="navi">
-      <li>
-        <a href="../php/{{HOME_PAGE}}">
-          <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
-        </a>
-      </li>
-      <li>
-        <a href="../php/{{HOME_PAGE}}">
-          <img class="home" src="../assets/home.svg" alt="Home">
-        </a>
-      </li>
-    </ul>
-  </nav>
+            <div class="nav-left">
+                <a href="../php/collector.php">
+                    <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
+                </a>
+            </div>
+            <div class="nav-right">
+                <div id="themeToggle" class="theme-toggle"></div>
+                <a href="../php/collector.php" class="home-btn">
+                    <span>HOME</span>
+                </a>
+            </div>
+        </nav>
 </header>
 
     <!-- Main Content Container -->
@@ -30,93 +39,104 @@
         <div class="page-header">
             <div class="header-content">
                 <div>
-                    <h2>PAYMENT MANAGEMENT</h2>
-                    <p>Record customer payments and view payment history organized by Customer ID</p>
+                    <h2>DAILY PAYMENT MANAGEMENT</h2>
+                    <p id="todayDate">Today: Loading...</p>
                 </div>
-                <button id="recordPaymentBtn" class="record-payment-btn">
-                    <span>+ RECORD PAYMENT</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Payment Form Modal -->
-        <div id="paymentModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Record New Payment</h3>
-                    <button class="close-modal" id="closeModal">&times;</button>
-                </div>
-                <form id="paymentForm">
-                    <div class="form-group">
-                        <label for="customerSelect">Select Customer *</label>
-                        <select id="customerSelect" name="customerID" required>
-                            <option value="">-- Select Customer --</option>
-                        </select>
-                    </div>
-                    <div id="customerInfo" class="customer-info" style="display: none;">
-                        <div class="info-row">
-                            <span class="info-label">Total Amount:</span>
-                            <span id="infoTotalAmount" class="info-value">₱0.00</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Amount Paid:</span>
-                            <span id="infoAmountPaid" class="info-value">₱0.00</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Remaining Balance:</span>
-                            <span id="infoBalance" class="info-value balance-amount">₱0.00</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentAmount">Payment Amount (₱) *</label>
-                        <input type="text" id="paymentAmount" name="amount" required placeholder="0.00" inputmode="decimal" pattern="[0-9,.]*">
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentDate">Payment Date</label>
-                        <input type="date" id="paymentDate" name="paymentDate" required>
-                    </div>
-                    <div id="formMessage" class="form-message"></div>
-                    <div class="form-actions">
-                        <button type="button" id="cancelBtn" class="btn-cancel">Cancel</button>
-                        <button type="submit" class="btn-submit">Record Payment</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Payment History Container -->
-        <div class="payment-container">
-            <div class="section-header">
-                <h3>Payment History</h3>
-                <button id="refreshBtn" class="refresh-btn" title="Refresh payment history">
+                <button id="refreshBtn" class="refresh-btn">
                     <span>🔄 Refresh</span>
                 </button>
             </div>
-            <div id="loadingMessage" class="loading-message">Loading payment history...</div>
-            <div id="noPaymentsMessage" class="no-payments-message" style="display: none;">
-                No payment records found.
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search customers by name..." autocomplete="off">
             </div>
-            <div id="paymentTableContainer" class="payment-table-wrapper" style="display: none;">
-                <table id="paymentTable" class="payment-table">
+        </div>
+
+        <!-- Customers Table Container -->
+        <div class="customers-container">
+            <div id="loadingMessage" class="loading-message">Loading customers...</div>
+            <div id="noCustomersMessage" class="no-customers-message" style="display: none;">
+                No customers found.
+            </div>
+            <div id="customersTableContainer" class="customers-table-wrapper" style="display: none;">
+                <table id="customersTable" class="customers-table">
                     <thead>
                         <tr>
-                            <th>Payment ID</th>
-                            <th>Customer ID</th>
                             <th>Customer Name</th>
-                            <th>Business Name</th>
-                            <th>Amount</th>
-                            <th>Payment Date</th>
-                            <th>Employee ID</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="paymentTableBody">
-                        <!-- Payment records will be inserted here -->
+                    <tbody id="customersTableBody">
+                        <!-- Customer rows will be inserted here -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Record Daily Payment</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <div class="display-field" id="modalCustomerName"></div>
+                    </div>
+                    
+                    <!-- Removed Payment Date, Total Loan Amount, and Amount Paid fields per request -->
+                    <div class="form-group">
+                        <label>Remaining Balance</label>
+                        <div class="display-field" id="modalRemainingBalance">₱0.00</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Daily Payment Amount</label>
+                        <div class="display-field" id="modalDailyPayment">₱0.00</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Loan Terms</label>
+                        <div class="display-field" id="modalTerms">0 days</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="customAmountCheckbox">
+                            <label for="customAmountCheckbox">Pay different amount today</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="customAmountGroup" style="display: none;">
+                        <label>Enter Amount to Pay Today</label>
+                        <input type="number" id="customAmount" min="1" step="0.01" placeholder="Enter amount">
+                    </div>
+                    
+                    <div class="form-group" id="alreadyPaidMessage" style="display: none;">
+                        <div class="already-paid-box">
+                            This customer has already paid today.
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions" id="paymentActions">
+                        <button type="submit" class="btn-proceed" id="proceedPayment">Proceed with Payment</button>
+                        <button type="button" class="btn-cancel" id="cancelPayment">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/payments.js"></script>
+    <script src="../js/dark_light_mode.js"></script>
+    <script src="../js/loading.js"></script>
 </body>
 </html>

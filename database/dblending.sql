@@ -35,12 +35,12 @@ CREATE TABLE `tblcustomeracc` (
   `Status` varchar(20) DEFAULT 'Active',
   `Balance` decimal(10,2) GENERATED ALWAYS AS (`TotalAmount` - `AmountPaid`) STORED,
   PRIMARY KEY (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblcustomeracc` */
 
 insert  into `tblcustomeracc`(`CustomerID`,`FirstName`,`LastName`,`BusinessName`,`Address`,`PhoneNum`,`LoanAmount`,`AmountPaid`,`DueDate`,`TotalAmount`,`PerDay`,`Status`) values 
-(5,'Christlyn','tiger','Jollibee','Highway Tagum','987654321',56789.00,0.00,'2026-01-02',59628.45,3138.34,'Active');
+(6,'Christlyn','Tuasoc','Jollibee','Highway Tagum','9876543210',10000.00,700.00,'2025-12-31',10500.00,700.00,'Active');
 
 /*Table structure for table `tbldepartment` */
 
@@ -74,17 +74,17 @@ CREATE TABLE `tblemployees` (
   UNIQUE KEY `Email` (`Email`),
   KEY `DeptID` (`DeptID`),
   CONSTRAINT `tblemployees_ibfk_1` FOREIGN KEY (`DeptID`) REFERENCES `tbldepartment` (`DeptID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblemployees` */
 
 insert  into `tblemployees`(`EmpID`,`FirstName`,`LastName`,`Email`,`PASSWORD`,`DeptID`) values 
 (1,'johnny','Doejali','admin@gmail.com','$2y$10$HF7tGQdAaq.f7AwpZ06NWeuV/sHTgoOwSlS.MtwQSw.y9hKFsOXF2',1),
-(6,'Miss','Ssim','TestCollector@gmail.com','$2y$10$1mbW6MMZsfr7rDEtX61R2egJ5g41Rr4bXYEu7Cwf9OubLITTe5N3e',3),
-(8,'jane','doe','jane@gmail.com','$2y$10$6VHR082WJSPSpfYUDRrHCe9XX.mG8GO6y0gp5ZT6Sdh2BMQDNgrA2',2),
+(2,'johnny','Doejali','admin1@gmail.com','admin123',1),
+(3,'Miss','Ssim','secretary2@gmail.com','secretary123',2),
+(4,'jane','doe','collector3@gmail.com','collector123',3),
 (9,'dsa','tiger','secretary@gmail.com','$2y$10$py4IV9LAhDD0QzTUSxq0D.soKjvKfCkM2aZjX2057NdallanxQcry',2),
-(10,'Christlyn','Tuasoc','christlyn@gmail.com','$2y$10$7brw3kiFP6uAjghhoGqLN.PCSJn/QLlZTnlDRwtaQV5pPckyKi4QS',3),
-(14,'johnny','tiger','secretary1@gmail.com','$2y$10$tR0eERDAL6JOxnv9adHJ9ei6w9LYQLnxSQ9L8afLBIGpnkgoYK43u',2);
+(15,'test','collector','collector@gmail.com','$2y$10$7tKnBD.8PzFSBQG8KNyqsO5gYHXvEN1vZBueUb88AED3DJfP1M4CG',3);
 
 /*Table structure for table `tblloginhistory` */
 
@@ -102,26 +102,22 @@ CREATE TABLE `tblloginhistory` (
   KEY `LogDate` (`LogDate`),
   KEY `EmpID_LogDate` (`EmpID`,`LogDate`),
   CONSTRAINT `tblloginhistory_ibfk_1` FOREIGN KEY (`EmpID`) REFERENCES `tblemployees` (`EmpID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblloginhistory` */
 
 insert  into `tblloginhistory`(`LogID`,`EmpID`,`LogDate`,`TimeIn`,`TimeOut`,`CreatedAt`) values 
-(1,1,'2025-12-14','08:30:00','12:00:00','2025-12-14 15:54:11'),
-(2,1,'2025-12-14','13:00:00','08:59:58','2025-12-14 15:54:11'),
-(3,6,'2025-12-14','09:15:00','17:30:00','2025-12-14 15:54:11'),
-(4,8,'2025-12-14','08:45:00',NULL,'2025-12-14 15:54:11'),
-(5,6,'2025-12-14','09:00:20','09:00:28','2025-12-14 16:00:20'),
-(6,1,'2025-12-14','09:00:38','09:02:10','2025-12-14 16:00:38'),
-(7,14,'2025-12-14','09:02:19','09:02:41','2025-12-14 16:02:19'),
-(8,1,'2025-12-14','09:02:48','09:03:03','2025-12-14 16:02:48'),
-(9,14,'2025-12-14','09:03:18','09:12:17','2025-12-14 16:03:18'),
-(10,1,'2025-12-14','09:12:23','09:48:33','2025-12-14 16:12:23'),
-(11,1,'2025-12-14','09:50:28','11:26:54','2025-12-14 16:50:28'),
-(12,1,'2025-12-14','11:27:02','12:06:46','2025-12-14 18:27:02'),
-(13,9,'2025-12-14','12:06:56','13:55:26','2025-12-14 19:06:56'),
-(14,1,'2025-12-14','13:55:35','13:56:17','2025-12-14 20:55:35'),
-(15,14,'2025-12-14','13:56:26','13:58:22','2025-12-14 20:56:26');
+(16,1,'2025-12-16','12:07:14','12:09:30','2025-12-16 19:07:15'),
+(17,9,'2025-12-16','12:09:41','12:10:59','2025-12-16 19:09:41'),
+(18,1,'2025-12-16','12:11:08','12:13:20','2025-12-16 19:11:08'),
+(19,9,'2025-12-16','12:13:34','12:37:02','2025-12-16 19:13:34'),
+(20,1,'2025-12-16','12:37:11','12:38:00','2025-12-16 19:37:11'),
+(21,15,'2025-12-16','12:38:07','16:07:00','2025-12-16 19:38:07'),
+(22,9,'2025-12-16','16:07:10','16:14:34','2025-12-16 23:07:10'),
+(23,1,'2025-12-16','16:14:39','16:16:14','2025-12-16 23:14:39'),
+(24,9,'2025-12-16','16:16:26','17:15:02','2025-12-16 23:16:26'),
+(25,1,'2025-12-16','17:15:11','17:15:39','2025-12-17 00:15:11'),
+(26,9,'2025-12-16','17:15:49','17:16:11','2025-12-17 00:15:49');
 
 /*Table structure for table `tblnotifications` */
 
@@ -138,13 +134,9 @@ CREATE TABLE `tblnotifications` (
   `status` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
   PRIMARY KEY (`notif_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblnotifications` */
-
-insert  into `tblnotifications`(`notif_id`,`notif_msg`,`type`,`is_read`,`meta`,`created_by`,`created_at`,`status`,`description`) values 
-(10,'New customer approval needed: Christlyn tiger (Jollibee)','customer_approval',1,'{\"application_id\":7,\"customer_name\":\"Christlyn tiger\",\"business_name\":\"Jollibee\",\"phone\":\"0987654321\",\"address\":\"Highway Tagum\",\"loan_amount\":56789,\"due_date\":\"2026-01-02\",\"total_amount\":59628.45,\"per_day\":3138.34,\"first_name\":\"Christlyn\",\"last_name\":\"tiger\",\"action_required\":\"customer_approval\"}','dsa tiger','2025-12-14 20:29:39',NULL,NULL),
-(11,'Customer Christlyn tiger approved. Loan: ₱56,789.00, Due: 2026-01-02','customer_approved',0,'{\"application_id\":7,\"customer_id\":5,\"action\":\"approved\",\"loan_amount\":\"56789.00\",\"due_date\":\"2026-01-02\"}','johnny Doejali','2025-12-14 20:55:52',NULL,NULL);
 
 /*Table structure for table `tblpaymenthistory` */
 
@@ -161,9 +153,12 @@ CREATE TABLE `tblpaymenthistory` (
   KEY `EmpID` (`EmpID`),
   CONSTRAINT `tblpaymenthistory_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `tblcustomeracc` (`CustomerID`),
   CONSTRAINT `tblpaymenthistory_ibfk_2` FOREIGN KEY (`EmpID`) REFERENCES `tblemployees` (`EmpID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblpaymenthistory` */
+
+insert  into `tblpaymenthistory`(`PaymentID`,`CustomerID`,`EmpID`,`Amount`,`PaymentDate`) values 
+(1,6,15,700.00,'2025-12-16');
 
 /*Table structure for table `tblrequirements` */
 
@@ -187,13 +182,12 @@ CREATE TABLE `tblrequirements` (
   PRIMARY KEY (`ApplicationID`),
   KEY `fk_requirements_customer` (`CustomerID`),
   CONSTRAINT `fk_requirements_customer` FOREIGN KEY (`CustomerID`) REFERENCES `tblcustomeracc` (`CustomerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tblrequirements` */
 
 insert  into `tblrequirements`(`ApplicationID`,`FirstName`,`LastName`,`BusinessName`,`PhoneNumber`,`CustomerAddress`,`LoanAmount`,`DueDate`,`TotalAmount`,`PerDay`,`Status`,`ApprovedBy`,`ApprovedAt`,`CustomerID`) values 
-(6,'christ','lyn','lol','09876543212','tagum',NULL,NULL,NULL,NULL,'Pending',NULL,NULL,NULL),
-(7,'Christlyn','tiger','Jollibee','987654321','Highway Tagum',56789.00,'2026-01-02',59628.45,3138.34,'Approved','johnny Doejali','2025-12-14 20:55:52',5);
+(8,'Christlyn','Tuasoc','Jollibee','9876543210','Highway Tagum',10000.00,'2025-12-31',10500.00,700.00,'Approved','johnny Doejali','2025-12-16 19:11:43',6);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

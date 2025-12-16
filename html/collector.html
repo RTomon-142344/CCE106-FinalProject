@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collector</title>
+  <title>Collector| Rean Ramz Lending Corporation</title>
   <link rel="stylesheet" href="../css/collector.css">
+  <link rel="stylesheet" href="../css/loading.css">
   <link rel="icon" href="../assets/logo-dark.png">
 </head>
 <body>
-  <!-- Header -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <img src="../assets/logo-light.png" alt="Rean Ramz Lending Corp" class="loading-logo-img">
+      </div>
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Loading...</div>
+    </div>
+  </div>
   <header>
     <nav class="nav-bar">
             <div class="nav-left">
-                <a href="admin.html">
+                <a href="../php/collector.php">
                     <img class="logo" src="../assets/logo-light.png" alt="Rean Ramz Lending Corp">
                 </a>
             </div>
@@ -28,25 +37,13 @@
   <!-- Stats Section -->
   <div class="stats-box">
     <div class="stats-text">
-      <h2>DAILY STATISTICS</h2>
-      <a>View more</a>
-    </div>
-    <div class="stats-graphics">
-      <img src="../assets/piechart.svg" alt="Pie chart">
-      <img src="../assets/barchart.svg" alt="Bar chart">
+        <h2>TOTAL DAILY COLLECTION</h2>
+        <h1 class="daily-collection">
+            <strong>₱<?php echo htmlspecialchars($formatted_collection); ?></strong>
+        </h1>
+        <a href="../php/collection_history.php">View more</a>
     </div>
   </div>
-
-  <!-- Main Content Container -->
-  <div class="serno">
-    <!-- Notifications -->
-    <div class="notify-section">
-      <h3>Notifications</h3>
-      <div class="notify-boxes">
-        <div class="notify-box">No new notifications</div>
-        <div class="notify-box">System running smoothly</div>
-      </div>
-    </div>
 
     <!-- Services -->
     <div class="services">
@@ -71,9 +68,23 @@
           </div>
         </a>
       </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="logout-modal">
+    <div class="logout-modal-content">
+      <div class="logout-modal-icon">⚠️</div>
+      <h2>Confirm Logout</h2>
+      <p>Are you sure you want to log out?</p>
+      <div class="logout-modal-buttons">
+        <button class="logout-modal-btn cancel" id="cancelLogout">Cancel</button>
+        <button class="logout-modal-btn confirm" id="confirmLogout">Logout</button>
+      </div>
     </div>
   </div>
-  <script src="../js/admin.js"></script>
+
+  <script src="../js/logout.js"></script>
   <script src="../js/dark_light_mode.js"></script>
+  <script src="../js/loading.js"></script>
 </body>
 </html>
